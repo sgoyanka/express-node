@@ -46,7 +46,7 @@ app.post('/',function(req, res) {
                 obj1.password = 0;
             }   
 
-            if (/^[0][1-9]|[12][0-9]|[3][0-2]-[0][1-9]|[1][0-2]-[0-9][0-9][0-9][0-9]/.test(req.body.birthday) ) {
+            if (/^[0][1-9]|[12][0-9]|[3][01]-[0][1-9]|[1][0-2]-[0-9][0-9][0-9][0-9]/.test(req.body.birthday) ) {
 
                 var q = new Date();
                 var m = q.getMonth();

@@ -26,152 +26,13 @@
     		
     		var k=0;
 
-
-    		/*if (/^[" "]*$/.test(username.value)) {
-    		    
-    		    k++;	
-	  	 	    document.getElementById('errorname').style.visibility = "visible";	      			
-       			document.getElementById('name').style.borderColor = "red";
-       			
-   			}	else {
-
-   				document.getElementById('errorname').style.visibility = "hidden";
-   				document.getElementById('name').style.borderColor = "green";
-   				
-   			}
-
-
-    		if (!/^(ftp|https?):\/\/+(www\.)?[a-z0-9\-\.]{3,}\.[a-z]{3}$/.test(url.value)) {
-    		    
-    		    k++;	
-	  	 	    document.getElementById('errorurl').style.visibility = "visible";	      			
-       			document.getElementById('urlid').style.borderColor = "red";
-       			
-   			}	else {
-
-   				document.getElementById('errorurl').style.visibility = "hidden";
-   				document.getElementById('urlid').style.borderColor = "green";
-   				
-   			}
-
-   			if (!/^[a-zA-Z0-9.!#$&_~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email.value)) {
-    		    
-    		    k++;	
-	  	 	    document.getElementById('errormail').style.visibility = "visible";	      			
-       			document.getElementById('emailid').style.borderColor = "red";
-       			
-   			}	else {
-
-   				document.getElementById('errormail').style.visibility = "hidden";
-   				document.getElementById('emailid').style.borderColor = "green";
-   				
-   			}
-
-   			if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/.test(password.value)) {
-
-   				k++;
-	  	 	    document.getElementById('errorpass').style.visibility = "visible";
-	   			document.getElementById('pass').style.borderColor = "red";
-    
-       				
-
-   			}	else {
-
-   				document.getElementById('errorpass').style.visibility = "hidden";
-   				document.getElementById('pass').style.borderColor = "green";
-   				
-
-   			}
-
-   		if (/^[0-2][0-9]|[3][0-2]-[0][0-9]|[1][0-2]-[0-9][0-9][0-9][0-9]/.test(birthday.value) ) {
-
-
-    			var q = new Date();
-				  var m = q.getMonth();
-				  var d = q.getDate();
-				  var y = q.getFullYear();
-
-				  var date = new Date(y,m,d);
-
-				  mydate = new Date(birthday.value);
-
-
-				  if ( mydate > date)  {
-   					k++;
-   					document.getElementById('errorbday').style.visibility = "visible";
-	  	 	    	document.getElementById('bdayid').style.borderColor = "red";
-    
-       			}	else {
-
-   					document.getElementById('errorbday').style.visibility = "hidden";
-   					document.getElementById('bdayid').style.borderColor = "green";
-	
-	  			} 
-
-   			}	else {
-
-   				document.getElementById('errorbday').style.visibility = "visible";
-   				document.getElementById('bdayid').style.borderColor = "red";
-	
-	  		} 
-
-
-   			
-   			if (!/^[0-9]*$/.test(telephone.value) || telephone.value.length != 10) {
-    		    
-    		  k++;	
-	  	 	  document.getElementById('errortel').style.visibility = "visible";
-	   			document.getElementById('telp').style.borderColor = "red";
-       			
-   			} else {
-
-   				
-   				document.getElementById('errortel').style.visibility = "hidden";
-   				document.getElementById('telp').style.borderColor = "green";
-	   			
-   			}
-
-   			if (/^[0-9]+$/.test(quant.value) ) {
-    		    
-    		  var num = parseInt(quant.value);
-
-    		  if( num >0 && num < 6) {
-    		    		
-	  	 	    document.getElementById('errorquant').style.visibility = "hidden";
-	   			  document.getElementById('quantp').style.borderColor = "green";
-	   		  } else {
-
-   			     k++;	
-	  	 	    document.getElementById('errorquant').style.visibility = "visible";
-	   			   document.getElementById('quantp').style.borderColor = "red";
-   				}
-       			
-   			} else {
-
-   				k++;	
-	  	 	  document.getElementById('errorquant').style.visibility = "visible";
-	   			document.getElementById('quantp').style.borderColor = "red";
-   			}
-*/
-   			/*if (!/^Week[" "][0-4][0-9][,][" "][0-9][0-9][0-9][0-9]/.test(week.value)) {
-    		    
-    		    k++;	
-	  	 	    document.getElementById('errorweek').style.visibility = "visible";	      			
-       			document.getElementById('weekid').style.borderColor = "red";
-       			
-   			}	else {
-
-   				document.getElementById('errorweek').style.visibility = "hidden";
-   				document.getElementById('weekid').style.borderColor = "green";
-   				
-   			}
-*/
+        
    			if ( k == 0 ) {
 
    				
 				  console.log("function call hua");
 
-    			var xhttp = new XMLHttpRequest();
+    			/*var xhttp = new XMLHttpRequest();
   				xhttp.onreadystatechange = function() {
     			if (this.readyState == 4 && this.status == 200) {
      			var obj2 = JSON.parse(xhttp.responseText);
@@ -182,11 +43,21 @@
 
   				xhttp.send(JSON.stringify(obj));
   			
-   				console.log(obj2);
+   				console.log(obj2);*/
+          var obj2 = {};
 
-   				alert("form submitted succefully");
-       			return true;
+          $.post("/",obj,function(data, status){
+            console.log(data);
 
+            
+
+            validate2(data);
+            
+   
+          
+            });
+
+         
 
    			} else{
 
@@ -197,9 +68,134 @@
 
 				
     	}
+      var ob3 = {};
 
-    		
+      function validate2(ob3) {
+        if (ob3.hasOwnProperty('username')) {
+            
+            
+            document.getElementById('errorname').style.visibility = "visible";              
+            document.getElementById('name').style.borderColor = "red";
+            
+        } else {
 
+          document.getElementById('errorname').style.visibility = "hidden";
+          document.getElementById('name').style.borderColor = "green";
+          
+        }
+
+
+        if (ob3.hasOwnProperty('url')) {
+            
+            
+            document.getElementById('errorurl').style.visibility = "visible";             
+            document.getElementById('urlid').style.borderColor = "red";
+            
+        } else {
+
+          document.getElementById('errorurl').style.visibility = "hidden";
+          document.getElementById('urlid').style.borderColor = "green";
+          
+        }
+
+        if (ob3.hasOwnProperty("email")) {
+            
+              
+            document.getElementById('errormail').style.visibility = "visible";              
+            document.getElementById('emailid').style.borderColor = "red";
+            
+        } else {
+
+          document.getElementById('errormail').style.visibility = "hidden";
+          document.getElementById('emailid').style.borderColor = "green";
+          
+        }
+
+        if (ob3.hasOwnProperty("password")) {
+
+          
+            document.getElementById('errorpass').style.visibility = "visible";
+          document.getElementById('pass').style.borderColor = "red";
+    
+              
+
+        } else {
+
+          document.getElementById('errorpass').style.visibility = "hidden";
+          document.getElementById('pass').style.borderColor = "green";
+          
+
+        }
+
+      if (ob3.hasOwnProperty("birthday") ) {
+
+
+           document.getElementById('errorbday').style.visibility = "visible";
+              document.getElementById('bdayid').style.borderColor = "red";
+    
+  
+        } else {
+
+            document.getElementById('errorbday').style.visibility = "hidden";
+            document.getElementById('bdayid').style.borderColor = "green";
+  
+        } 
+
+
+        
+        if (ob3.hasOwnProperty("telephone")) {
+            
+            
+          document.getElementById('errortel').style.visibility = "visible";
+          document.getElementById('telp').style.borderColor = "red";
+            
+        } else {
+
+          
+          document.getElementById('errortel').style.visibility = "hidden";
+          document.getElementById('telp').style.borderColor = "green";
+          
+        }
+
+        if (ob3.hasOwnProperty("quant") ) {
+             
+            document.getElementById('errorquant').style.visibility = "visible";
+             document.getElementById('quantp').style.borderColor = "red";
+          
+            
+        } else {
+
+          document.getElementById('errorquant').style.visibility = "hidden";
+            document.getElementById('quantp').style.borderColor = "green";
+        }
+
+        if (ob3.hasOwnProperty("week")) {
+            
+             
+            document.getElementById('errorweek').style.visibility = "visible";              
+            document.getElementById('weekid').style.borderColor = "red";
+            
+        } else {
+
+          document.getElementById('errorweek').style.visibility = "hidden";
+          document.getElementById('weekid').style.borderColor = "green";
+          
+        }
+
+        if (ob3.hasOwnProperty("month")) {
+            
+            
+            document.getElementById('errormonth').style.visibility = "visible";              
+            document.getElementById('monthid').style.borderColor = "red";
+            
+        } else {
+
+          document.getElementById('errormonth').style.visibility = "hidden";
+          document.getElementById('monthid').style.borderColor = "green";
+          
+        }
+
+        }
 
     			
     </script>
@@ -229,12 +225,10 @@
         <% include ../partials/footer %>
     </footer>
     
-</body>
-</html>    
 
 <form name ="form1">
 
-	User name : <br>
+  User name : <br>
     <input type="text" name = "userName"  id = "name" /> <br>
     <span id="errorname" style="color:red; visibility:hidden"> username is Invalid </span><br>
 
@@ -244,28 +238,28 @@
 
 
     E-mail: <br>
-  	<input type="email" name="email" id = "emailid" /><br>
-  	<span id="errormail" style="color:red; visibility:hidden"> Email is Invalid </span><br>
+    <input type="email" name="email" id = "emailid" /><br>
+    <span id="errormail" style="color:red; visibility:hidden"> Email is Invalid </span><br>
 
-  	Quantity (between 1 and 5): <br><br>
-  	<input type="number" name="quantity" min="1" max="5" id = "quantp" /><br>
-  	<span id="errorquant" style="color:red; visibility:hidden"> Number is Invalid </span><br>
+    Quantity (between 1 and 5): <br><br>
+    <input type="number" name="quantity" min="1" max="5" id = "quantp" /><br>
+    <span id="errorquant" style="color:red; visibility:hidden"> Number is Invalid </span><br>
 
-  	Add your homepage: <br>
-  	<input type="url" name="homepage" id = "urlid" /><br>
-  	<span id="errorurl" style="color:red; visibility:hidden"> url is Invalid </span><br>
+    Add your homepage: <br>
+    <input type="url" name="homepage" id = "urlid" /><br>
+    <span id="errorurl" style="color:red; visibility:hidden"> url is Invalid </span><br>
 
-   	Birthday:
-  	<input type="date" name="bday" id = "bdayid" /><br>
-	<span id="errorbday" style="color:red; visibility:hidden"> Birthday is Invalid </span><br>
+    Birthday:
+    <input type="date" name="bday" id = "bdayid" /><br>
+  <span id="errorbday" style="color:red; visibility:hidden"> Birthday is Invalid </span><br>
 
-  	Telephone:
-  	<input type="tel" name="usrtel" id = "telp" /><br>
-  	<span id="errortel" style="color:red; visibility:hidden"> Number is Invalid </span><br>
+    Telephone:
+    <input type="tel" name="usrtel" id = "telp" /><br>
+    <span id="errortel" style="color:red; visibility:hidden"> Number is Invalid </span><br>
 
-	  Select a week:	<br>
-  	<input type="week" name="week_year" id = "weekid" /><br>
-  	<span id="errorweek" style="color:red; visibility:hidden"> entry is Invalid </span><br>
+    Select a week:  <br>
+    <input type="week" name="week_year" id = "weekid" /><br>
+    <span id="errorweek" style="color:red; visibility:hidden"> entry is Invalid </span><br>
 
     Birthday (month ): <br>
     <input type="month" name="bdaymonth" id = "monthid"><br>
@@ -275,4 +269,6 @@
     <button type="button" onclick = "validateform()"></button>  
 
 </form>
-
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+</html>    
