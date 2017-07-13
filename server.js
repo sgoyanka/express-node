@@ -15,133 +15,96 @@ app.use(bodyparser.json());
 
 app.post('/',function(req, res) {
 
-	console.log(req.body.a);
 
-    if (/^[" "]*$/.test(req.body.username)) {
-                
-                k++;    
-                
-            }   else {
+            console.log(req.body.username);
 
+            var obj1 = {};
+
+	       
+            if (/^[" "]*$/.test(req.body.username)) {
                 
-            }
+                obj1.username = 0;    
+                
+            }   
 
 
-            if (!/^(ftp|https?):\/\/+(www\.)?[a-z0-9\-\.]{3,}\.[a-z]{3}$/.test(url.value)) {
+            if (!/^(ftp|https?):\/\/+(www\.)?[a-z0-9\-\.]{3,}\.[a-z]{3}$/.test(req.body.url)) {
                 
-                k++;    
+                obj1.url = 0;    
                
-            }   else {
+            }   
 
+            if (!/^[a-zA-Z0-9.!#$&_~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(req.body.email)) {
                 
-                
-            }
-
-            if (!/^[a-zA-Z0-9.!#$&_~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email.value)) {
-                
-                k++;    
+                obj1.email = 0;    
                
                 
-            }   else {
+            }   
 
-               
-            }
+            if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/.test(req.body.password)) {
 
-            if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/.test(password.value)) {
+                obj1.password = 0;
+            }   
 
-                k++;
-               
-    
-                    
-
-            }   else {
-
-               s
-            }
-
-        /*if (/^[0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/.test(birthday.value) ) {
-
+            if (/^[0][1-9]|[12][0-9]|[3][0-2]-[0][1-9]|[1][0-2]-[0-9][0-9][0-9][0-9]/.test(req.body.birthday) ) {
 
                 var q = new Date();
-                  var m = q.getMonth();
-                  var d = q.getDate();
-                  var y = q.getFullYear();
+                var m = q.getMonth();
+                var d = q.getDate();
+                var y = q.getFullYear();
 
-                  var date = new Date(y,m,d);
+                var date = new Date(y,m,d);
 
-                  mydate = new Date(birthday.value);
+                mydate = new Date(req.body.birthday);
 
+                if( mydate > date)
+                {
+                    obj1.birthday = 0;
+                }
 
-                  if ( isNaN(mydate.getTime()) && mydate > date)  {
-                    k++;
-                    document.getElementById('errorbday').style.visibility = "visible";
-                    document.getElementById('bdayid').style.borderColor = "red";
-    
-                }   else {
+                
+            } else {
 
-                    document.getElementById('errorbday').style.visibility = "hidden";
-                    document.getElementById('bdayid').style.borderColor = "green";
-    
-                } 
+                obj1.birthday = 0;
 
-            }   else {
-
-                document.getElementById('errorbday').style.visibility = "visible";
-                document.getElementById('bdayid').style.borderColor = "red";
-    
-            } */
-
+            }
 
             
-            if (!/^[0-9]*$/.test(telephone.value) || telephone.value.length != 10) {
+            if (!/^[0-9]*$/.test(req.body.telephone) || req.body.telephone.length != 10) {
                 
-              k++;  
-              document.getElementById('errortel').style.visibility = "visible";
-                document.getElementById('telp').style.borderColor = "red";
+              obj1.telephone = 0;  
                 
-            } else {
+            }   
 
+            if (/^[0-9]+$/.test(req.body.quant) ) {
                 
-                document.getElementById('errortel').style.visibility = "hidden";
-                document.getElementById('telp').style.borderColor = "green";
-                
-            }
+              var num = parseInt(req.body.quant);
 
-            if (/^[0-9]+$/.test(quant.value) ) {
-                
-              var num = parseInt(quant.value);
-
-              if( num >0 && num < 6) {
+              if( num <1 || num > 5) {
                         
-                document.getElementById('errorquant').style.visibility = "hidden";
-                  document.getElementById('quantp').style.borderColor = "green";
-              } else {
-
-                 k++;   
-                document.getElementById('errorquant').style.visibility = "visible";
-                   document.getElementById('quantp').style.borderColor = "red";
-                }
+                        obj1.quant = 0;
+                
+              } 
                 
             } else {
 
-                k++;    
-              document.getElementById('errorquant').style.visibility = "visible";
-                document.getElementById('quantp').style.borderColor = "red";
+                obj1.quant = 0;    
             }
 
-            /*if (!/^Week[" "][0-4][0-9][,][" "][0-9][0-9][0-9][0-9]/.test(week.value)) {
+            if (!/^[0-9][0-9][0-9][0-9]-[0][1-9]|[1][0-2]/.test(req.body.month)) {
                 
-                k++;    
-                document.getElementById('errorweek').style.visibility = "visible";                  
-                document.getElementById('weekid').style.borderColor = "red";
+                obj1.month = 0;    
                 
-            }   else {
+            }
 
-                document.getElementById('errorweek').style.visibility = "hidden";
-                document.getElementById('weekid').style.borderColor = "green";
+            if (!/^[0-9][0-9][0-9][0-9]-W[0][1-9]|[1-4][0-9]|[5][0-2]/.test(req.body.week)) {
                 
-            }*/
+                obj1.week = 0;    
+                
+            }
 
+            res.set('Content-Type' , 'application/json');
+            res.send(JSON.stringify(obj1));
 
 
 

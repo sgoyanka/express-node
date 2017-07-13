@@ -17,17 +17,17 @@
     		var telephone = form1.usrtel;
    			var birthday = form1.bday;	
  	  		var week = form1.week_year;
- 		   	//var month = form.bdaymonth;   			
+ 		   	var month = form1.bdaymonth;   			
  		   	var quant = form1.quantity;
  		   	var email = form1.email;
  			  var url = form1.homepage;
     		
-        var obj = { username  : username.value , password : password.value , telephone : telephone.value , birthday : birthday.value , week : week.value , quant : quant.value , email : email.value , url : url.value};
+        var obj = { username  : username.value , password : password.value , telephone : telephone.value , birthday : birthday.value , week : week.value , quant : quant.value , email : email.value , url : url.value , month : month.value};
     		
     		var k=0;
 
 
-    		if (/^[" "]*$/.test(username.value)) {
+    		/*if (/^[" "]*$/.test(username.value)) {
     		    
     		    k++;	
 	  	 	    document.getElementById('errorname').style.visibility = "visible";	      			
@@ -83,7 +83,7 @@
 
    			}
 
-   		/*if (/^[0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/.test(birthday.value) ) {
+   		if (/^[0-2][0-9]|[3][0-2]-[0][0-9]|[1][0-2]-[0-9][0-9][0-9][0-9]/.test(birthday.value) ) {
 
 
     			var q = new Date();
@@ -96,7 +96,7 @@
 				  mydate = new Date(birthday.value);
 
 
-				  if ( isNaN(mydate.getTime()) && mydate > date)  {
+				  if ( mydate > date)  {
    					k++;
    					document.getElementById('errorbday').style.visibility = "visible";
 	  	 	    	document.getElementById('bdayid').style.borderColor = "red";
@@ -113,7 +113,7 @@
    				document.getElementById('errorbday').style.visibility = "visible";
    				document.getElementById('bdayid').style.borderColor = "red";
 	
-	  		} */
+	  		} 
 
 
    			
@@ -152,7 +152,7 @@
 	  	 	  document.getElementById('errorquant').style.visibility = "visible";
 	   			document.getElementById('quantp').style.borderColor = "red";
    			}
-
+*/
    			/*if (!/^Week[" "][0-4][0-9][,][" "][0-9][0-9][0-9][0-9]/.test(week.value)) {
     		    
     		    k++;	
@@ -164,8 +164,8 @@
    				document.getElementById('errorweek').style.visibility = "hidden";
    				document.getElementById('weekid').style.borderColor = "green";
    				
-   			}*/
-
+   			}
+*/
    			if ( k == 0 ) {
 
    				
@@ -174,7 +174,7 @@
     			var xhttp = new XMLHttpRequest();
   				xhttp.onreadystatechange = function() {
     			if (this.readyState == 4 && this.status == 200) {
-     			var obj2 = JSON.parse(this.responseText);
+     			var obj2 = JSON.parse(xhttp.responseText);
     			}
   				};
   				xhttp.open("POST", "/", true);
@@ -182,7 +182,7 @@
 
   				xhttp.send(JSON.stringify(obj));
   			
-   				
+   				console.log(obj2);
 
    				alert("form submitted succefully");
        			return true;
@@ -263,9 +263,14 @@
   	<input type="tel" name="usrtel" id = "telp" /><br>
   	<span id="errortel" style="color:red; visibility:hidden"> Number is Invalid </span><br>
 
-	Select a week:	<br>
+	  Select a week:	<br>
   	<input type="week" name="week_year" id = "weekid" /><br>
   	<span id="errorweek" style="color:red; visibility:hidden"> entry is Invalid </span><br>
+
+    Birthday (month ): <br>
+    <input type="month" name="bdaymonth" id = "monthid"><br>
+    <span id="errormonth" style="color:red ; visibility: hidden">Month is invalid</span><br>
+
 
     <button type="button" onclick = "validateform()"></button>  
 
