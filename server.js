@@ -11,7 +11,7 @@ app.set('view engine', 'ejs');
 // index page
 app.post('/',function(req, res) {
 
-	console.log("yaha request aa gayi", "dkjsgfhjdsg hjfdghjg");
+	console.log("yaha request aa gayi", req.data);
 }); 
 app.get('/', function(req, res) {
 
@@ -34,5 +34,5 @@ app.get('/about', function(req, res) {
     res.render('pages/about');
 });
 
-app.listen(3000);
+app.listen(8080);
 console.log('3000 is the magic port');

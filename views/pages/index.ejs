@@ -10,17 +10,17 @@
 
 			
     		
-    	function validateform(form) {
+    	function validateform() {
 
-    		var username = form.userName;
-    		var password = form.psw;
-    		var telephone = form.usrtel;
- 			var birthday = form.bday;	
- 			var week = form.week_year;
+    		var username = form1.userName;
+    		var password = form1.psw;
+    		var telephone = form1.usrtel;
+ 			var birthday = form1.bday;	
+ 			var week = form1.week_year;
  			//var month = form.bdaymonth;   			
- 			var quant = form.quantity;
- 			var email = form.email;
- 			var url = form.homepage;
+ 			var quant = form1.quantity;
+ 			var email = form1.email;
+ 			var url = form1.homepage;
     		
 
 
@@ -169,7 +169,21 @@
 
    			if ( k == 0 ) {
 
+   				var obj = {a : 1 ,b : 2};
 
+				console.log("function call hua");
+
+    			var xhttp = new XMLHttpRequest();
+  				xhttp.onreadystatechange = function() {
+    			if (this.readyState == 4 && this.status == 200) {
+     			document.getElementById("demo").innerHTML = this.responseText;
+    			}
+  				};
+  				xhttp.open("POST", "/", true);
+  				xhttp.setRequestHeader("Content-type","application/json");
+
+  				xhttp.send(JSON.stringify(obj));
+  			
    				
 
    				alert("form submitted succefully");
@@ -186,29 +200,7 @@
 				
     	}
 
-    	function axiosserver() {
-
-    		console.log("function call hua");
-
-    		var axios = require('axios');
-			axios.post('/', {
-			user_name : 1,
-    		pass_word : 2,
-    		})
-  			.then(function (response) {
-
-  			console.log("data waaps aa gaya");
-    			//resultElement.innerHTML = generateSuccessHTMLOutput(response);
-  			})
-  			.catch(function (error) {
-  			console.log("error aaya data aane main");
-    		//resultElement.innerHTML = generateErrorHTMLOutput(error);
-  			});
-  
-  			e.preventDefault();
-			}
-
-    	}
+    		
 
 
     			
@@ -239,46 +231,45 @@
         <% include ../partials/footer %>
     </footer>
     
-    
+</body>
+</html>    
 
-<form onsubmit="axiosserver();" >
+<form name ="form1">
 
 	User name : <br>
-    <input type="text" name = "userName"  id = "name"> <br>
+    <input type="text" name = "userName"  id = "name" /> <br>
     <span id="errorname" style="color:red; visibility:hidden"> username is Invalid </span><br>
 
     Password : <br>
-    <input type="password" name = "psw" id = "pass"> <br>
+    <input type="password" name = "psw" id = "pass" /> <br>
     <span id="errorpass" style="color:red; visibility:hidden"> Password is Invalid </span><br>
 
 
     E-mail: <br>
-  	<input type="email" name="email" id = "emailid"><br>
+  	<input type="email" name="email" id = "emailid" /><br>
   	<span id="errormail" style="color:red; visibility:hidden"> Email is Invalid </span><br>
 
   	Quantity (between 1 and 5): <br><br>
-  	<input type="number" name="quantity" min="1" max="5" id = "quantp"><br>
+  	<input type="number" name="quantity" min="1" max="5" id = "quantp" /><br>
   	<span id="errorquant" style="color:red; visibility:hidden"> Number is Invalid </span><br>
 
   	Add your homepage: <br>
-  	<input type="url" name="homepage" id = "urlid"><br>
+  	<input type="url" name="homepage" id = "urlid" /><br>
   	<span id="errorurl" style="color:red; visibility:hidden"> url is Invalid </span><br>
 
    	Birthday:
-  	<input type="date" name="bday" id = "bdayid"><br>
+  	<input type="date" name="bday" id = "bdayid" /><br>
 	<span id="errorbday" style="color:red; visibility:hidden"> Birthday is Invalid </span><br>
 
   	Telephone:
-  	<input type="tel" name="usrtel" id = "telp"><br>
+  	<input type="tel" name="usrtel" id = "telp" /><br>
   	<span id="errortel" style="color:red; visibility:hidden"> Number is Invalid </span><br>
 
 	Select a week:	<br>
-  	<input type="week" name="week_year" id = "weekid"><br>
+  	<input type="week" name="week_year" id = "weekid" /><br>
   	<span id="errorweek" style="color:red; visibility:hidden"> entry is Invalid </span><br>
 
-    <input type="submit" value = "Send" name = "submit">
+    <button type="button" onclick = "validateform()"></button>  
 
 </form>
 
-</body>
-</html>
