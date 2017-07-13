@@ -15,15 +15,14 @@
     		var username = form1.userName;
     		var password = form1.psw;
     		var telephone = form1.usrtel;
- 			var birthday = form1.bday;	
- 			var week = form1.week_year;
- 			//var month = form.bdaymonth;   			
- 			var quant = form1.quantity;
- 			var email = form1.email;
- 			var url = form1.homepage;
+   			var birthday = form1.bday;	
+ 	  		var week = form1.week_year;
+ 		   	//var month = form.bdaymonth;   			
+ 		   	var quant = form1.quantity;
+ 		   	var email = form1.email;
+ 			  var url = form1.homepage;
     		
-
-
+        var obj = { username  : username.value , password : password.value , telephone : telephone.value , birthday : birthday.value , week : week.value , quant : quant.value , email : email.value , url : url.value};
     		
     		var k=0;
 
@@ -84,20 +83,20 @@
 
    			}
 
-   			/*if (/^[0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/.test(birthday.value) ) {
+   		/*if (/^[0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/.test(birthday.value) ) {
 
 
     			var q = new Date();
-				var m = q.getMonth();
-				var d = q.getDate();
-				var y = q.getFullYear();
+				  var m = q.getMonth();
+				  var d = q.getDate();
+				  var y = q.getFullYear();
 
-				var date = new Date(y,m,d);
+				  var date = new Date(y,m,d);
 
-				mydate = new Date(birthday.value);
+				  mydate = new Date(birthday.value);
 
 
-				if ( isNaN(mydate.getTime()) && mydate > date)  {
+				  if ( isNaN(mydate.getTime()) && mydate > date)  {
    					k++;
    					document.getElementById('errorbday').style.visibility = "visible";
 	  	 	    	document.getElementById('bdayid').style.borderColor = "red";
@@ -120,8 +119,8 @@
    			
    			if (!/^[0-9]*$/.test(telephone.value) || telephone.value.length != 10) {
     		    
-    		    k++;	
-	  	 	    document.getElementById('errortel').style.visibility = "visible";
+    		  k++;	
+	  	 	  document.getElementById('errortel').style.visibility = "visible";
 	   			document.getElementById('telp').style.borderColor = "red";
        			
    			} else {
@@ -134,23 +133,23 @@
 
    			if (/^[0-9]+$/.test(quant.value) ) {
     		    
-    		    var num = parseInt(quant.value);
+    		  var num = parseInt(quant.value);
 
-    		    if( num >0 && num < 6) {
+    		  if( num >0 && num < 6) {
     		    		
-	  	 	    	document.getElementById('errorquant').style.visibility = "hidden";
-	   				document.getElementById('quantp').style.borderColor = "green";
-	   			} else {
+	  	 	    document.getElementById('errorquant').style.visibility = "hidden";
+	   			  document.getElementById('quantp').style.borderColor = "green";
+	   		  } else {
 
-   					k++;	
-	  	 	    	document.getElementById('errorquant').style.visibility = "visible";
-	   				document.getElementById('quantp').style.borderColor = "red";
+   			     k++;	
+	  	 	    document.getElementById('errorquant').style.visibility = "visible";
+	   			   document.getElementById('quantp').style.borderColor = "red";
    				}
        			
    			} else {
 
    				k++;	
-	  	 	    document.getElementById('errorquant').style.visibility = "visible";
+	  	 	  document.getElementById('errorquant').style.visibility = "visible";
 	   			document.getElementById('quantp').style.borderColor = "red";
    			}
 
@@ -169,14 +168,13 @@
 
    			if ( k == 0 ) {
 
-   				var obj = {a : 1 ,b : 2};
-
-				console.log("function call hua");
+   				
+				  console.log("function call hua");
 
     			var xhttp = new XMLHttpRequest();
   				xhttp.onreadystatechange = function() {
     			if (this.readyState == 4 && this.status == 200) {
-     			document.getElementById("demo").innerHTML = this.responseText;
+     			var obj2 = JSON.parse(this.responseText);
     			}
   				};
   				xhttp.open("POST", "/", true);

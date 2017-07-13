@@ -1,10 +1,11 @@
 {
   "name": "node-ejs",
   "main": "server.js",
-  "scripts" : {
-  	"start" : "nodemon server.js"
+  "scripts": {
+    "start": "nodemon server.js"
   },
   "dependencies": {
+    "body-parser": "^1.17.2",
     "ejs": "^1.0.0",
     "express": "^4.6.1",
     "nodemon": "^1.11.0"
