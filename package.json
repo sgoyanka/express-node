@@ -8,6 +8,7 @@
     "body-parser": "^1.17.2",
     "ejs": "^1.0.0",
     "express": "^4.6.1",
+    "mongodb": "^2.2.30",
     "nodemon": "^1.11.0"
   }
 }
