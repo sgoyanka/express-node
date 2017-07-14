@@ -18,13 +18,18 @@ app.use(bodyparser.json());
 app.post('/',function(req, res) {
 
 
+            var k = 0;
+
+
             console.log(req.body.username);
 
             var obj1 = {};
+            var obj2 = {username : req.body.username , url : req.body.url , email : req.body.email , password : req.body.password , birthday : req.body.birthday , telephone : req.body.telephone , month : req.body.month , week : req.body.week};
 
 	       
             if (/^[" "]*$/.test(req.body.username)) {
                 
+                k++;
                 obj1.username = 0;    
                 
             }   
@@ -32,12 +37,14 @@ app.post('/',function(req, res) {
 
             if (!/^(ftp|https?):\/\/+(www\.)?[a-z0-9\-\.]{3,}\.[a-z]{3}$/.test(req.body.url)) {
                 
+                k++;
                 obj1.url = 0;    
                
             }   
 
             if (!/^[a-zA-Z0-9.!#$&_~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(req.body.email)) {
                 
+                k++
                 obj1.email = 0;    
                
                 
@@ -45,6 +52,7 @@ app.post('/',function(req, res) {
 
             if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/.test(req.body.password)) {
 
+                k++;
                 obj1.password = 0;
             }   
 
@@ -61,19 +69,22 @@ app.post('/',function(req, res) {
 
                 if( mydate > date)
                 {
+                    k++;
                     obj1.birthday = 0;
                 }
 
                 
             } else {
 
+                k++;
                 obj1.birthday = 0;
 
             }
 
             
             if (!/^[0-9]*$/.test(req.body.telephone) || req.body.telephone.length != 10) {
-                
+              
+              k++;  
               obj1.telephone = 0;  
                 
             }   
@@ -84,25 +95,46 @@ app.post('/',function(req, res) {
 
               if( num <1 || num > 5) {
                         
+                        k++;
                         obj1.quant = 0;
                 
               } 
                 
             } else {
 
+                k++;
+
                 obj1.quant = 0;    
             }
 
             if (!/^[0-9][0-9][0-9][0-9]-[0][1-9]|[1][0-2]/.test(req.body.month)) {
                 
+                k++;
                 obj1.month = 0;    
                 
             }
 
             if (!/^[0-9][0-9][0-9][0-9]-W[0][1-9]|[1-4][0-9]|[5][0-2]/.test(req.body.week)) {
                 
+                k++;
                 obj1.week = 0;    
                 
+            }
+
+            if(k==0)
+            {
+                MongoClient.connect('mongodb://127.0.0.1:27017/expressdb', function(err, db) {
+                    if(err) throw err;
+
+                    var collection = db.collection('user_col');
+                    collection.insert(obj2, function(err, docs) {
+                        collection.count(function(err, count) {
+                            console.log(format("count = %s", count));
+                            console.log("data stored in database");
+                            db.close();
+                        });
+                    });
+                });
             }
 
             res.set('Content-Type' , 'application/json');
