@@ -71,9 +71,12 @@
       var ob3 = {};
 
       function validate2(ob3) {
+
+        var k=0;
+
         if (ob3.hasOwnProperty('username')) {
             
-            
+            k++;
             document.getElementById('errorname').style.visibility = "visible";              
             document.getElementById('name').style.borderColor = "red";
             
@@ -87,7 +90,7 @@
 
         if (ob3.hasOwnProperty('url')) {
             
-            
+            k++;
             document.getElementById('errorurl').style.visibility = "visible";             
             document.getElementById('urlid').style.borderColor = "red";
             
@@ -100,7 +103,7 @@
 
         if (ob3.hasOwnProperty("email")) {
             
-              
+            k++;  
             document.getElementById('errormail').style.visibility = "visible";              
             document.getElementById('emailid').style.borderColor = "red";
             
@@ -113,8 +116,8 @@
 
         if (ob3.hasOwnProperty("password")) {
 
-          
-            document.getElementById('errorpass').style.visibility = "visible";
+          k++;
+          document.getElementById('errorpass').style.visibility = "visible";
           document.getElementById('pass').style.borderColor = "red";
     
               
@@ -127,11 +130,11 @@
 
         }
 
-      if (ob3.hasOwnProperty("birthday") ) {
+        if (ob3.hasOwnProperty("birthday") ) {
 
-
-           document.getElementById('errorbday').style.visibility = "visible";
-              document.getElementById('bdayid').style.borderColor = "red";
+          k++;
+          document.getElementById('errorbday').style.visibility = "visible";
+          document.getElementById('bdayid').style.borderColor = "red";
     
   
         } else {
@@ -145,7 +148,7 @@
         
         if (ob3.hasOwnProperty("telephone")) {
             
-            
+          k++; 
           document.getElementById('errortel').style.visibility = "visible";
           document.getElementById('telp').style.borderColor = "red";
             
@@ -158,22 +161,23 @@
         }
 
         if (ob3.hasOwnProperty("quant") ) {
-             
-            document.getElementById('errorquant').style.visibility = "visible";
-             document.getElementById('quantp').style.borderColor = "red";
+          
+          k++;   
+          document.getElementById('errorquant').style.visibility = "visible";
+          document.getElementById('quantp').style.borderColor = "red";
           
             
         } else {
 
           document.getElementById('errorquant').style.visibility = "hidden";
-            document.getElementById('quantp').style.borderColor = "green";
+          document.getElementById('quantp').style.borderColor = "green";
         }
 
         if (ob3.hasOwnProperty("week")) {
             
-             
-            document.getElementById('errorweek').style.visibility = "visible";              
-            document.getElementById('weekid').style.borderColor = "red";
+          k++;     
+          document.getElementById('errorweek').style.visibility = "visible";              
+          document.getElementById('weekid').style.borderColor = "red";
             
         } else {
 
@@ -184,15 +188,25 @@
 
         if (ob3.hasOwnProperty("month")) {
             
-            
-            document.getElementById('errormonth').style.visibility = "visible";              
-            document.getElementById('monthid').style.borderColor = "red";
+          k++;  
+          document.getElementById('errormonth').style.visibility = "visible";              
+          document.getElementById('monthid').style.borderColor = "red";
             
         } else {
 
           document.getElementById('errormonth').style.visibility = "hidden";
           document.getElementById('monthid').style.borderColor = "green";
           
+        }
+
+        if(k == 0) {
+
+          alert("form submitted succefully");
+          window.location = "/username";
+           
+        } else {
+
+          return false;
         }
 
         }
@@ -219,6 +233,7 @@
     		<% age.forEach(function(ages) { %>
         	<li><%= ages.name %> - <%= ages.drunkness %></li>
     		<% }); %>
+
 		</ul>
 
     <footer>
