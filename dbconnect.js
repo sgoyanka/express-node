@@ -36,22 +36,24 @@ MongoClient.connect('mongodb://127.0.0.1:27017/seconddb', function(err, db) {
     });
 });*/
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/expressdb');
+mongoose.connect('mongodb://localhost/expressnode');
+console.log("connected to database successfully");
 var Schema = mongoose.Schema;
 
 // create a schema
 var userSchema = new Schema({
-  name: String,
+
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  admin: Boolean,
-  location: String,
-  meta: {
-    age: Number,
-    website: String
-  },
-  created_at: Date,
-  updated_at: Date
+  quant: Number,
+  birthday: Date,
+  email : { type : String, required: true, unique: true, validate: {
+                validator: function(v) {
+                    return /^[a-zA-Z0-9.!#$&_~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(v);
+                },
+            message: '{VALUE} is not a valid email!'
+            } 
+        }
 });
 
 

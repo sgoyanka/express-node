@@ -1,9 +1,11 @@
 var User = require('./dbconnect.js');
 
 var chris = new User({
-  name: 'Chris',
   username: 'sevilayha2',
-  password: 'password' 
+  password: 'password',
+  quant: 5,
+  birthday : 23-07-1997,
+  email : 'shanu@gmail.com' 
 });
 
 
@@ -13,3 +15,4 @@ chris.save(function(err) {
 
   console.log('User saved successfully!');
 });
+
