@@ -179,19 +179,33 @@ app.get('/username', function(req, res) {
    
 });
 
-app.get('/edit', function(req, res) {
-    res.render('pages/edit');
+app.get('/edit/:id', function(req, res) {
+
+    User.findById(req.params.id, function (err, docs) {
+        console.log(docs);
+       res.render('pages/editdata',{ages :docs, b: req.params.id});
+    });
+    
 });
-app.post('/edit',function(req,res){
+
+/*app.get('/editdata', function(req, res) {
+    res.render('pages/editdata',{
+            userdata : req.params.docs
+       });
+});*/
+
+app.post('/username',function(req,res){
 
 
     console.log("edit ke post mai aa gaya");
+    console.log(req.body.password);
 
-    var s = req.body.username;
-    User.find({s}, function (err, docs) {
-       console.log(docs);
-        });
+    User.findByIdAndUpdate(req.body.id,{$set :{username : req.body.username, birthday : req.body.birthday, password : req.body.password, email: req.body.email, quant: req.body.quant}}, function (err) {
+       console.log("successfully updated");
+       res.redirect('/username');
+
     });
+});
 
 
 

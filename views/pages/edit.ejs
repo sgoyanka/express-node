@@ -2,13 +2,33 @@
 <html lang="en">
 <body>
 
+<script>
 	
-	<form name = "form" method = "POST" action = "/editdata">
+	function finduser() {
+
+		var obj = { username : form.userName.value};
+		console.log(obj);
+		$.get("/editdata",obj,function(data, status){
+            console.log(data);
+
+            
+
+          
+            window.location = "/editdata";
+
+
+		});
+	}
+
+
+</script>
+	
+	<form name = "form">
 		User name : <br>
     	<input type="text" name = "userName"  id = "name" /> <br>
     	<span id="errorname" style="color:red; visibility:hidden"> username is Invalid </span><br>
 
-		<button type="submit" ></button>
+		<button type="button" onclick = "finduser()"></button>
 
 	</form>
 
