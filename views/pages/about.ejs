@@ -1,0 +1,192 @@
+<!-- views/pages/about.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+    <script>
+
+        function checkusername() {
+
+            var username = document.getElementById('name');
+
+            if (/^[" "]*$/.test(username.value)) {
+                    
+                var error = document.getElementById('errorname');
+    
+                error.innerHTML="Please enter your first name";
+                error.style.color = "red";
+                document.getElementById('name').style.borderColor = "red";
+                return false;
+
+            } else {
+
+                var error = document.getElementById('errorname');
+    
+                error.innerHTML="";
+                error.style.color = "green";
+                document.getElementById('name').style.borderColor = "green";
+                return true;
+            
+            }
+        }
+
+        function checkpassword() {
+
+            var password = document.getElementById('pass');
+
+            if ( password.value.length < 8) {
+
+                var error = document.getElementById('errorpass');
+    
+                error.innerHTML="Password should be of minimum 8 characster";
+                error.style.color = "red";
+                document.getElementById('pass').style.borderColor = "red";
+    
+                return false;   
+
+            } else {
+
+                var error = document.getElementById('errorpass');
+    
+                error.innerHTML="";
+                error.style.color = "green";
+                document.getElementById('pass').style.borderColor = "green";
+    
+                return true;   
+
+
+            }
+        }
+
+        function checkbday() {
+
+            var q = new Date();
+            var m = q.getMonth();
+            var d = q.getDate();
+            var y = q.getFullYear();
+
+            var date = new Date(y,m,d);
+            var birthday = document.getElementById('bdayid');
+            mydate=new Date(birthday.value);
+
+
+            if ( mydate > date) {
+
+                var error = document.getElementById('errorbday');
+    
+                error.innerHTML = "date should be older than the current dates";
+                error.style.color = "red";
+                document.getElementById('bdayid').style.borderColor = "red";
+    
+                return false;   
+
+            } else {
+
+                var error = document.getElementById('errorbday');
+    
+                error.innerHTML = "";
+                error.style.color = "green";
+                document.getElementById('bdayid').style.borderColor = "green";
+    
+                return true;
+
+            }
+        }
+
+        function checktelephone() {
+
+            var telephone = document.getElementById('telp');
+
+            if (!/^[0-9]*$/.test(telephone.value) || telephone.value.length != 10) {
+                    
+                var error = document.getElementById('errortel');
+    
+                error.innerHTML="Invalid Phone Number";
+                error.style.color = "red";
+                document.getElementById('telp').style.borderColor = "red";
+                return false;
+            } else {
+
+                var error = document.getElementById('errortel');
+    
+                error.innerHTML="";
+                error.style.color = "green";
+                document.getElementById('telp').style.borderColor = "green";
+                return true;
+            }
+        }
+
+    </script>
+</head>
+<body class="container">
+
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <main>
+        <div class="row">
+            <div class="col-sm-8">
+
+                <div class="jumbotron">
+                    <h1>This is great</h1>
+                    <p>Welcome to templating using EJS</p>
+                </div>
+
+            </div>
+            <div class="col-sm-4">
+
+                <div class="well">
+                    <h3>Look I'm A Sidebar!</h3>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <% include ../partials/footer %>
+    </footer>
+
+    <form >
+
+    User name : <br>
+    <input type="text" name = "userName"  id = "name" onblur = "checkusername()"> <br>
+    <p id="errorname"></p>
+
+    Password : <br>
+    <input type="password" name = "psw" id = "pass" onblur = "checkpassword()"> <br>
+    <p id="errorpass"></p>
+
+
+    <input type="radio" name="gender" value="male" checked> Male<br>
+    <input type="radio" name="gender" value="female"> Female<br>
+    <input type="radio" name="gender" value="other"> Other <br>
+
+    <input type="checkbox" name="vehicle1" value="Bike"> I have a bike<br>
+    <input type="checkbox" name="vehicle2" value="Car"> I have a car<br>
+
+    Birthday:
+    <input type="date" name="bday" id = "bdayid" onblur = "checkbday()"><br><br>
+    <p id="errorbday"></p>
+
+    Telephone:
+    <input type="tel" name="usrtel" id = "telp" onblur = "checktelephone()"><br>
+    <p id="errortel"></p>
+
+    Select a week:  <br>
+    <input type="week" name="week_year" id = "weekid"><br><br>
+    <p id="errorweek"></p>
+
+    Birthday (month ): <br>
+    <input type="month" name="bdaymonth" id = "monthid"><br><br>
+    <p id="errormonth"></p>
+
+    <input type="submit" value = "Send" name = "submit">
+
+</form>
+
+
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!-- views/pages/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+
+    <script>
+
+
+			
+    		
+    	function validateform() {
+
+    		var username = form1.userName;
+    		var password = form1.psw;
+    		var telephone = form1.usrtel;
+   			var birthday = form1.bday;	
+ 	  		var week = form1.week_year;
+ 		   	var month = form1.bdaymonth;   			
+ 		   	var quant = form1.quantity;
+ 		   	var email = form1.email;
+ 			  var url = form1.homepage;
+    		
+        var obj = { username  : username.value , password : password.value , telephone : telephone.value , birthday : birthday.value , week : week.value , quant : quant.value , email : email.value , url : url.value , month : month.value};
+    		
+    		var k=0;
+
+        
+   			if ( k == 0 ) {
+
+   				
+				  console.log("function call hua");
+
+    			/*var xhttp = new XMLHttpRequest();
+  				xhttp.onreadystatechange = function() {
+    			if (this.readyState == 4 && this.status == 200) {
+     			var obj2 = JSON.parse(xhttp.responseText);
+    			}
+  				};
+  				xhttp.open("POST", "/", true);
+  				xhttp.setRequestHeader("Content-type","application/json");
+
+  				xhttp.send(JSON.stringify(obj));
+  			
+   				console.log(obj2);*/
+          var obj2 = {};
+
+          $.post("/",obj,function(data, status){
+            console.log(data);
+
+            
+
+            validate2(data);
+            window.location = "/username";
+   
+          
+            });
+
+         
+
+   			} else{
+
+   				return false;
+   				
+   			}
+
+
+				
+    	}
+      var ob3 = {};
+
+      function validate2(ob3) {
+
+        var k=0;
+
+        if (ob3.hasOwnProperty('username')) {
+            
+            k++;
+            document.getElementById('errorname').style.visibility = "visible";              
+            document.getElementById('name').style.borderColor = "red";
+            
+        } else {
+
+          document.getElementById('errorname').style.visibility = "hidden";
+          document.getElementById('name').style.borderColor = "green";
+          
+        }
+
+
+        if (ob3.hasOwnProperty('url')) {
+            
+            k++;
+            document.getElementById('errorurl').style.visibility = "visible";             
+            document.getElementById('urlid').style.borderColor = "red";
+            
+        } else {
+
+          document.getElementById('errorurl').style.visibility = "hidden";
+          document.getElementById('urlid').style.borderColor = "green";
+          
+        }
+
+        if (ob3.hasOwnProperty("email")) {
+            
+            k++;  
+            document.getElementById('errormail').style.visibility = "visible";              
+            document.getElementById('emailid').style.borderColor = "red";
+            
+        } else {
+
+          document.getElementById('errormail').style.visibility = "hidden";
+          document.getElementById('emailid').style.borderColor = "green";
+          
+        }
+
+        if (ob3.hasOwnProperty("password")) {
+
+          k++;
+          document.getElementById('errorpass').style.visibility = "visible";
+          document.getElementById('pass').style.borderColor = "red";
+    
+              
+
+        } else {
+
+          document.getElementById('errorpass').style.visibility = "hidden";
+          document.getElementById('pass').style.borderColor = "green";
+          
+
+        }
+
+        if (ob3.hasOwnProperty("birthday") ) {
+
+          k++;
+          document.getElementById('errorbday').style.visibility = "visible";
+          document.getElementById('bdayid').style.borderColor = "red";
+    
+  
+        } else {
+
+            document.getElementById('errorbday').style.visibility = "hidden";
+            document.getElementById('bdayid').style.borderColor = "green";
+  
+        } 
+
+
+        
+        if (ob3.hasOwnProperty("telephone")) {
+            
+          k++; 
+          document.getElementById('errortel').style.visibility = "visible";
+          document.getElementById('telp').style.borderColor = "red";
+            
+        } else {
+
+          
+          document.getElementById('errortel').style.visibility = "hidden";
+          document.getElementById('telp').style.borderColor = "green";
+          
+        }
+
+        if (ob3.hasOwnProperty("quant") ) {
+          
+          k++;   
+          document.getElementById('errorquant').style.visibility = "visible";
+          document.getElementById('quantp').style.borderColor = "red";
+          
+            
+        } else {
+
+          document.getElementById('errorquant').style.visibility = "hidden";
+          document.getElementById('quantp').style.borderColor = "green";
+        }
+
+        if (ob3.hasOwnProperty("week")) {
+            
+          k++;     
+          document.getElementById('errorweek').style.visibility = "visible";              
+          document.getElementById('weekid').style.borderColor = "red";
+            
+        } else {
+
+          document.getElementById('errorweek').style.visibility = "hidden";
+          document.getElementById('weekid').style.borderColor = "green";
+          
+        }
+
+        if (ob3.hasOwnProperty("month")) {
+            
+          k++;  
+          document.getElementById('errormonth').style.visibility = "visible";              
+          document.getElementById('monthid').style.borderColor = "red";
+            
+        } else {
+
+          document.getElementById('errormonth').style.visibility = "hidden";
+          document.getElementById('monthid').style.borderColor = "green";
+          
+        }
+
+        if(k == 0) {
+
+          alert("form submitted succefully");
+          window.location = "/username";
+           
+        } else {
+
+          return false;
+        }
+
+        }
+
+    			
+    </script>
+
+</head>
+<body class="container">
+
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <main>
+        <div class="jumbotron">
+            <h1>This is great</h1>
+            <p>Welcome to templating using EJS</p>
+        </div>
+    </main>
+
+    <h2>Age Data</h2>
+		<ul>
+    		<% age.forEach(function(ages) { %>
+        	<li><%= ages.name %> - <%= ages.drunkness %></li>
+    		<% }); %>
+
+		</ul>
+
+    <footer>
+        <% include ../partials/footer %>
+    </footer>
+    
+
+<form name ="form1">
+
+  User name : <br>
+    <input type="text" name = "userName"  id = "name" /> <br>
+    <span id="errorname" style="color:red; visibility:hidden"> username is Invalid </span><br>
+
+    Password : <br>
+    <input type="password" name = "psw" id = "pass" /> <br>
+    <span id="errorpass" style="color:red; visibility:hidden"> Password is Invalid </span><br>
+
+
+    E-mail: <br>
+    <input type="email" name="email" id = "emailid" /><br>
+    <span id="errormail" style="color:red; visibility:hidden"> Email is Invalid </span><br>
+
+    Quantity (between 1 and 5): <br><br>
+    <input type="number" name="quantity" min="1" max="5" id = "quantp" /><br>
+    <span id="errorquant" style="color:red; visibility:hidden"> Number is Invalid </span><br>
+
+    Add your homepage: <br>
+    <input type="url" name="homepage" id = "urlid" /><br>
+    <span id="errorurl" style="color:red; visibility:hidden"> url is Invalid </span><br>
+
+    Birthday:
+    <input type="date" name="bday" id = "bdayid" /><br>
+  <span id="errorbday" style="color:red; visibility:hidden"> Birthday is Invalid </span><br>
+
+    Telephone:
+    <input type="tel" name="usrtel" id = "telp" /><br>
+    <span id="errortel" style="color:red; visibility:hidden"> Number is Invalid </span><br>
+
+    Select a week:  <br>
+    <input type="week" name="week_year" id = "weekid" /><br>
+    <span id="errorweek" style="color:red; visibility:hidden"> entry is Invalid </span><br>
+
+    Birthday (month ): <br>
+    <input type="month" name="bdaymonth" id = "monthid"><br>
+    <span id="errormonth" style="color:red ; visibility: hidden">Month is invalid</span><br>
+
+
+    <button type="button" onclick = "validateform()"></button>  
+
+</form>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+</html>    
