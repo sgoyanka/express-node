@@ -120,7 +120,7 @@ app.post('/',function(req, res) {
             {
             
                 
-                  
+
                 var user1 = new User({
     
                     username: req.body.username,
@@ -178,6 +178,22 @@ app.get('/username', function(req, res) {
 
    
 });
+
+app.get('/edit', function(req, res) {
+    res.render('pages/edit');
+});
+app.post('/edit',function(req,res){
+
+
+    console.log("edit ke post mai aa gaya");
+
+    var s = req.body.username;
+    User.find({s}, function (err, docs) {
+       console.log(docs);
+        });
+    });
+
+
 
 app.listen(3000);
 console.log('3000 is the magic port');
