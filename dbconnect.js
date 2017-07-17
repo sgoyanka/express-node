@@ -1,6 +1,10 @@
 
 var mongoose = require('mongoose');
-mongoose.createConnection('mongodb://localhost/expressnode');
+var db = mongoose.createConnection('mongodb://localhost/expressnode');
+db.once('open',function callback() {
+                console.log('db connection open');
+            });
+
 console.log("connected to database successfully");
 var Schema = mongoose.Schema;
 
@@ -21,7 +25,7 @@ var userSchema = new Schema({
 
 
 
-var User = mongoose.model('User', userSchema);
+var User = db.model('User', userSchema);
 
 module.exports = User;
 

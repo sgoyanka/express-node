@@ -120,7 +120,7 @@ app.post('/',function(req, res) {
             {
             
                 
-
+                  
                 var user1 = new User({
     
                     username: req.body.username,
@@ -169,7 +169,7 @@ app.get('/about', function(req, res) {
 app.get('/username', function(req, res) {
 
    console.log("username page mai aa gaya");
-   
+
     User.find({}, function (err, docs) {
         res.render('pages/username',{
             userdata : docs
