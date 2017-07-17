@@ -174,9 +174,14 @@ app.get('/about', function(req, res) {
 app.get('/username', function(req, res) {
 
    
+ User.find({}, function (err, docs) {
+       // var obj3 = JSON.parse(docs);
+         res.render('pages/username',{
+            userdata : docs
+         });
+    });
 
-
-    res.render('pages/username',req.body.username);
+   
 });
 
 app.listen(3000);
