@@ -2,8 +2,7 @@
 // load the things we need
 var express = require('express');
 var bodyparser = require('body-parser');
-var MongoClient = require('mongodb').MongoClient
-    , format = require('util').format;
+var User = require('./dbconnect.js');
 var app = express();
 
 // set the view engine to ejs
@@ -123,18 +122,26 @@ app.post('/',function(req, res) {
 
             if(k==0)
             {
-                MongoClient.connect('mongodb://127.0.0.1:27017/expressdb', function(err, db) {
-                    if(err) throw err;
+            
+                
 
-                    var collection = db.collection('user_col');
-                    collection.insert(obj2, function(err, docs) {
-                        collection.count(function(err, count) {
-                            console.log(format("count = %s", count));
-                            console.log("data stored in database");
-                            db.close();
-                        });
-                    });
+                var chris = new User({
+    
+                    username: req.body.username,
+                    password: req.body.password,
+                    quant: req.body.quant,
+                    birthday : req.body.birthday,
+                    email : req.body.email 
                 });
+
+
+
+// call the built-in save method to save to the database
+                chris.save(function(err) {
+                    if (err) throw err;
+
+                    console.log('User saved successfully!');
+                });    
             }
 
             res.set('Content-Type' , 'application/json');
@@ -162,6 +169,14 @@ app.get('/', function(req, res) {
 // about page 
 app.get('/about', function(req, res) {
     res.render('pages/about');
+});
+
+app.get('/username', function(req, res) {
+
+   
+
+
+    res.render('pages/username',req.body.username);
 });
 
 app.listen(3000);

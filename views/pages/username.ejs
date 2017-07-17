@@ -1,0 +1,75 @@
+<!-- views/pages/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+
+   
+</head>
+<body class="container">
+
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <main>
+        <div class="jumbotron">
+            <h1>This is great</h1>
+            <p>Welcome to templating using EJS</p>
+        </div>
+    </main>
+
+    <h2>Age Data</h2>
+       
+    <footer>
+        <% include ../partials/footer %>
+    </footer>
+    
+
+<form name ="form1">
+
+  User name : <br>
+    <input type="text" name = "userName"  id = "name" /> <br>
+    <span id="errorname" style="color:red; visibility:hidden"> username is Invalid </span><br>
+
+    Password : <br>
+    <input type="password" name = "psw" id = "pass" /> <br>
+    <span id="errorpass" style="color:red; visibility:hidden"> Password is Invalid </span><br>
+
+
+    E-mail: <br>
+    <input type="email" name="email" id = "emailid" /><br>
+    <span id="errormail" style="color:red; visibility:hidden"> Email is Invalid </span><br>
+
+    Quantity (between 1 and 5): <br><br>
+    <input type="number" name="quantity" min="1" max="5" id = "quantp" /><br>
+    <span id="errorquant" style="color:red; visibility:hidden"> Number is Invalid </span><br>
+
+    Add your homepage: <br>
+    <input type="url" name="homepage" id = "urlid" /><br>
+    <span id="errorurl" style="color:red; visibility:hidden"> url is Invalid </span><br>
+
+    Birthday:
+    <input type="date" name="bday" id = "bdayid" /><br>
+  <span id="errorbday" style="color:red; visibility:hidden"> Birthday is Invalid </span><br>
+
+    Telephone:
+    <input type="tel" name="usrtel" id = "telp" /><br>
+    <span id="errortel" style="color:red; visibility:hidden"> Number is Invalid </span><br>
+
+    Select a week:  <br>
+    <input type="week" name="week_year" id = "weekid" /><br>
+    <span id="errorweek" style="color:red; visibility:hidden"> entry is Invalid </span><br>
+
+    Birthday (month ): <br>
+    <input type="month" name="bdaymonth" id = "monthid"><br>
+    <span id="errormonth" style="color:red ; visibility: hidden">Month is invalid</span><br>
+
+
+    
+
+</form>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+</html>    
