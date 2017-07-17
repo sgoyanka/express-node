@@ -1,16 +1,12 @@
-// server.js
-// load the things we need
+
 var express = require('express');
 var bodyparser = require('body-parser');
 var User = require('./dbconnect.js');
 var app = express();
 
-// set the view engine to ejs
 app.set('view engine', 'ejs');
 
-// use res.render to load up an ejs view file
 
-// index page
 app.use(bodyparser.urlencoded({ extended : false}));
 app.use(bodyparser.json());
 
@@ -125,7 +121,7 @@ app.post('/',function(req, res) {
             
                 
 
-                var chris = new User({
+                var user1 = new User({
     
                     username: req.body.username,
                     password: req.body.password,
@@ -136,8 +132,7 @@ app.post('/',function(req, res) {
 
 
 
-// call the built-in save method to save to the database
-                chris.save(function(err) {
+                user1.save(function(err) {
                     if (err) throw err;
 
                     console.log('User saved successfully!');
@@ -166,19 +161,19 @@ app.get('/', function(req, res) {
     });
 });
 
-// about page 
+
 app.get('/about', function(req, res) {
     res.render('pages/about');
 });
 
 app.get('/username', function(req, res) {
 
+   console.log("username page mai aa gaya");
    
- User.find({}, function (err, docs) {
-       // var obj3 = JSON.parse(docs);
-         res.render('pages/username',{
+    User.find({}, function (err, docs) {
+        res.render('pages/username',{
             userdata : docs
-         });
+        });
     });
 
    

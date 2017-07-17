@@ -1,6 +1,6 @@
 var User = require('./dbconnect.js');
 
-var chris = new User({
+var user1 = new User({
   username: 'sevilayha2',
   password: 'password',
   quant: 5,
@@ -10,7 +10,7 @@ var chris = new User({
 
 
 // call the built-in save method to save to the database
-chris.save(function(err) {
+user1.save(function(err) {
   if (err) throw err;
 
   console.log('User saved successfully!');
