@@ -188,6 +188,16 @@ app.get('/edit/:id', function(req, res) {
     
 });
 
+app.get('/delete/:id', function(req, res) {
+
+    User.findByIdAndRemove(req.params.id, function (err, docs) {
+        console.log(docs._id +  " successfully deleted");
+        res.redirect('/username');
+    });
+    
+});
+
+
 /*app.get('/editdata', function(req, res) {
     res.render('pages/editdata',{
             userdata : req.params.docs
