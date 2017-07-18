@@ -1,17 +1,12 @@
-// server.js
-// load the things we need
+
 var express = require('express');
 var bodyparser = require('body-parser');
-var MongoClient = require('mongodb').MongoClient
-    , format = require('util').format;
+var User = require('./dbconnect.js');
 var app = express();
 
-// set the view engine to ejs
 app.set('view engine', 'ejs');
 
-// use res.render to load up an ejs view file
 
-// index page
 app.use(bodyparser.urlencoded({ extended : false}));
 app.use(bodyparser.json());
 
@@ -123,18 +118,25 @@ app.post('/',function(req, res) {
 
             if(k==0)
             {
-                MongoClient.connect('mongodb://127.0.0.1:27017/expressdb', function(err, db) {
-                    if(err) throw err;
+            
+                
 
-                    var collection = db.collection('user_col');
-                    collection.insert(obj2, function(err, docs) {
-                        collection.count(function(err, count) {
-                            console.log(format("count = %s", count));
-                            console.log("data stored in database");
-                            db.close();
-                        });
-                    });
+                var user1 = new User({
+    
+                    username: req.body.username,
+                    password: req.body.password,
+                    quant: req.body.quant,
+                    birthday : req.body.birthday,
+                    email : req.body.email 
                 });
+
+
+
+                user1.save(function(err) {
+                    if (err) throw err;
+
+                    console.log('User saved successfully!');
+                });    
             }
 
             res.set('Content-Type' , 'application/json');
@@ -159,10 +161,63 @@ app.get('/', function(req, res) {
     });
 });
 
-// about page 
+
 app.get('/about', function(req, res) {
     res.render('pages/about');
 });
+
+app.get('/username', function(req, res) {
+
+   console.log("username page mai aa gaya");
+
+    User.find({}, function (err, docs) {
+        res.render('pages/username',{
+            userdata : docs
+        });
+    });
+
+   
+});
+
+app.get('/edit/:id', function(req, res) {
+
+    User.findById(req.params.id, function (err, docs) {
+        console.log(docs);
+       res.render('pages/editdata',{ages :docs, b: req.params.id});
+    });
+    
+});
+
+app.get('/delete/:id', function(req, res) {
+
+    User.findByIdAndRemove(req.params.id, function (err, docs) {
+        console.log(docs._id +  " successfully deleted");
+        res.redirect('/username');
+    });
+    
+});
+
+
+/*app.get('/editdata', function(req, res) {
+    res.render('pages/editdata',{
+            userdata : req.params.docs
+       });
+});*/
+
+app.post('/username',function(req,res){
+
+
+    console.log("edit ke post mai aa gaya");
+    console.log(req.body.password);
+
+    User.findByIdAndUpdate(req.body.id,{$set :{username : req.body.username, birthday : req.body.birthday, password : req.body.password, email: req.body.email, quant: req.body.quant}}, function (err) {
+       console.log("successfully updated");
+       res.redirect('/username');
+
+    });
+});
+
+
 
 app.listen(3000);
 console.log('3000 is the magic port');

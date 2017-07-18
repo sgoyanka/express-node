@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+
+   
+</head>
+<body class="container">
+
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <main>
+        <div class="jumbotron">
+            <h1>This is great</h1>
+            <p>Welcome to templating using EJS</p>
+        </div>
+    </main>
+
+    <h2>User Data</h2>
+
+    <form action="/username" method="post" name = "form">
+        Object Id: <input type="hidden" name="id" value="<%= b %>" readonly="readonly"/><br><br>
+        Username: <input type="text" name="username" value="<%= ages.username %>" /><br><br>
+        Password: <input type="text" name="password" value="<%= ages.password %>" /><br><br>
+        Email: <input type="text" name="email" value="<%= ages.email %>" /><br><br>
+        Birthday: <input type="date" name="birthday" value="<%= (new Date(ages.birthday)).toISOString().split("T",1) %>" /><br><br>
+        Number: <input type="text" name="quant" value="<%= ages.quant %>" /><br><br>
+        <input type="submit" value="update"/><br><br><hr>
+    </form>
+       
+    <footer>
+        <% include ../partials/footer %>
+    </footer>
+    
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+</html>    
