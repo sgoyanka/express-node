@@ -1,8 +1,8 @@
 
-var express = require('express');
-var bodyparser = require('body-parser');
-var User = require('./dbconnect.js');
-var app = express();
+import express from 'express';
+import bodyparser from 'body-parser';
+import User from './dbconnect.js';
+const app = express();
 
 app.set('view engine', 'ejs');
 
@@ -10,16 +10,16 @@ app.set('view engine', 'ejs');
 app.use(bodyparser.urlencoded({ extended : false}));
 app.use(bodyparser.json());
 
-app.post('/',function(req, res) {
+app.post('/',(req, res)=> {
 
 
-            var k = 0;
+            let k = 0;
 
 
             console.log(req.body.username);
 
-            var obj1 = {};
-            var obj2 = {username : req.body.username , url : req.body.url , email : req.body.email , password : req.body.password , birthday : req.body.birthday , telephone : req.body.telephone , month : req.body.month , week : req.body.week};
+            const obj1 = {};
+            const obj2 = {username : req.body.username , url : req.body.url , email : req.body.email , password : req.body.password , birthday : req.body.birthday , telephone : req.body.telephone , month : req.body.month , week : req.body.week};
 
 	       
             if (/^[" "]*$/.test(req.body.username)) {
@@ -53,14 +53,14 @@ app.post('/',function(req, res) {
 
             if (/^[0][1-9]|[12][0-9]|[3][01]-[0][1-9]|[1][0-2]-[0-9][0-9][0-9][0-9]/.test(req.body.birthday) ) {
 
-                var q = new Date();
-                var m = q.getMonth();
-                var d = q.getDate();
-                var y = q.getFullYear();
+                const q = new Date();
+                const m = q.getMonth();
+                const d = q.getDate();
+                const y = q.getFullYear();
 
-                var date = new Date(y,m,d);
+                const date = new Date(y,m,d);
 
-                mydate = new Date(req.body.birthday);
+                const mydate = new Date(req.body.birthday);
 
                 if( mydate > date)
                 {
@@ -86,7 +86,7 @@ app.post('/',function(req, res) {
 
             if (/^[0-9]+$/.test(req.body.quant) ) {
                 
-              var num = parseInt(req.body.quant);
+              const num = parseInt(req.body.quant);
 
               if( num <1 || num > 5) {
                         
@@ -121,7 +121,7 @@ app.post('/',function(req, res) {
             
                 
 
-                var user1 = new User({
+                const user1 = new User({
     
                     username: req.body.username,
                     password: req.body.password,
@@ -132,7 +132,7 @@ app.post('/',function(req, res) {
 
 
 
-                user1.save(function(err) {
+                user1.save((err)=> {
                     if (err) throw err;
 
                     console.log('User saved successfully!');
@@ -145,11 +145,11 @@ app.post('/',function(req, res) {
 
 
 }); 
-app.get('/', function(req, res) {
+app.get('/', (req, res)=> {
 
 	console.log("yaha toh chal raha hai");
 
-	var age = [
+	const age = [
         { name: 'Shanu', drunkness: 21 },
         { name: 'Sujay', drunkness: 21 },
         { name: 'nitesh', drunkness: 22 }
@@ -162,15 +162,15 @@ app.get('/', function(req, res) {
 });
 
 
-app.get('/about', function(req, res) {
+app.get('/about', (req, res)=> {
     res.render('pages/about');
 });
 
-app.get('/username', function(req, res) {
+app.get('/username', (req, res)=> {
 
    console.log("username page mai aa gaya");
 
-    User.find({}, function (err, docs) {
+    User.find({}, (err, docs)=> {
         res.render('pages/username',{
             userdata : docs
         });
@@ -179,18 +179,18 @@ app.get('/username', function(req, res) {
    
 });
 
-app.get('/edit/:id', function(req, res) {
+app.get('/edit/:id', (req, res)=> {
 
-    User.findById(req.params.id, function (err, docs) {
+    User.findById(req.params.id, (err, docs)=> {
         console.log(docs);
        res.render('pages/editdata',{ages :docs, b: req.params.id});
     });
     
 });
 
-app.get('/delete/:id', function(req, res) {
+app.get('/delete/:id', (req, res)=> {
 
-    User.findByIdAndRemove(req.params.id, function (err, docs) {
+    User.findByIdAndRemove(req.params.id, (err, docs)=> {
         console.log(docs._id +  " successfully deleted");
         res.redirect('/username');
     });
@@ -198,19 +198,19 @@ app.get('/delete/:id', function(req, res) {
 });
 
 
-/*app.get('/editdata', function(req, res) {
+/*app.get('/editdata', (req, res)=> {
     res.render('pages/editdata',{
             userdata : req.params.docs
        });
 });*/
 
-app.post('/username',function(req,res){
+app.post('/username',(req, res)=>{
 
 
     console.log("edit ke post mai aa gaya");
     console.log(req.body.password);
 
-    User.findByIdAndUpdate(req.body.id,{$set :{username : req.body.username, birthday : req.body.birthday, password : req.body.password, email: req.body.email, quant: req.body.quant}}, function (err) {
+    User.findByIdAndUpdate(req.body.id,{$set :{username : req.body.username, birthday : req.body.birthday, password : req.body.password, email: req.body.email, quant: req.body.quant}}, (err)=> {
        console.log("successfully updated");
        res.redirect('/username');
 
@@ -219,5 +219,5 @@ app.post('/username',function(req,res){
 
 
 
-app.listen(3000);
+app.listen(8080);
 console.log('3000 is the magic port');

@@ -23,7 +23,7 @@
     <h2>User Data</h2>
 
     <ul>
-        <% userdata.forEach(function(ages) { %>
+        <% userdata.forEach((ages)=> { %>
           <li><%= ages.username %> - <%= ages.email %> - <%= ages.birthday %> - <%= ages.quant %>  <a href="/edit/<%=ages._id%>">Edit</a>  <a href="/delete/<%=ages._id%>">Delete</a></li>
         <% }); %>
 
